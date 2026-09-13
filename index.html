@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07100b"><title>ScoreX — Scores. Live. Pronostics.</title>
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top"><div class="brand"><div class="logo">S<span>X</span></div><div><b>SCORE<span>X</span></b><small>TOUS LES SPORTS. EN TEMPS RÉEL.</small></div></div><div class="actions"><button>⌕</button><button>🔔</button><div class="avatar">H</div></div></header>
+<main>
+<section class="sports" id="sports"></section><div id="dataSource" class="data-source">Mode démonstration</div>
+<section class="filters"><button class="active" data-filter="all">Tous</button><button data-filter="live">🔴 En direct <em>12</em></button><button data-filter="upcoming">À venir</button><button data-filter="fav">Mes matchs</button><button data-filter="results">Résultats</button></section>
+<section class="hero"><div><label>SCOREX</label><h1>TOUS LES SPORTS.<br><span>UNE SEULE PASSION.</span></h1><p>Scores en direct · statistiques · pronostics à points</p><button class="cta" onclick="show('predictions')">Faire un pronostic →</button></div><div class="hero-art">⚽ 🏀 🎾<br>🏎️ 🥊 🏒</div></section>
+<section id="home" class="page active"><div class="section-head"><h2>🔴 Matchs en direct</h2><button>Voir tout →</button></div><div id="matches" class="matches"></div><div class="grid2"><div><div class="section-head"><h2>📅 Matchs à venir</h2><button>Voir tout →</button></div><div id="upcoming" class="panel"></div></div><div><div class="section-head"><h2>🎯 Pronostics populaires</h2></div><div class="panel" id="popular"></div></div></div></section>
+<section id="predictions" class="page"><div class="section-head"><h2>🎯 Pronostics ScoreX</h2></div><div class="panel" id="predictionList"></div></section>
+<section id="rankings" class="page"><div class="section-head"><h2>🏆 Classements</h2></div><div class="panel"><div class="tabs"><button class="active">Utilisateurs</button><button>Équipes</button><button>Compétitions</button></div><div id="rankingList"></div></div></section>
+<section id="profile" class="page"><div class="profile panel"><div class="big-avatar">H</div><div><h2>Mon profil</h2><p>Niveau 12 · 2 450 pts</p><div class="progress"><i></i></div></div></div><div class="stats"><div><b>248</b><small>Pronostics</small></div><div><b>156</b><small>Gagnés</small></div><div><b>92</b><small>Perdus</small></div><div><b>63%</b><small>Réussite</small></div></div><div class="panel menu"><div>⭐ Mes favoris <span>›</span></div><div>🕘 Historique <span>›</span></div><div>🏅 Récompenses <span>›</span></div><div>⚙️ Paramètres <span>›</span></div></div></section>
+</main>
+<nav class="bottom"><button class="active" onclick="show('home')">⌂<span>Accueil</span></button><button onclick="show('home')">▦<span>Matchs</span></button><button onclick="show('predictions')">◎<span>Pronostics</span></button><button onclick="show('rankings')">▥<span>Classement</span></button><button onclick="show('profile')">♙<span>Profil</span></button></nav>
+<script src="api.js"></script><script src="app.js"></script>
+</body></html>
