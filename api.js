@@ -115,41 +115,34 @@ async function loadSportsCatalog(){
 
 function setupTabs(){
 
-  const tabs = document.querySelectorAll(
-    'button[data-filter]'
-  );
+  const filters = document.querySelector('.filters');
 
-  tabs.forEach(button => {
+  if(!filters) return;
 
-    button.addEventListener('click', () => {
+  filters.addEventListener('click', (event) => {
 
-      const filter = button.dataset.filter;
+    const button = event.target.closest('button[data-filter]');
 
-      if(filter === 'live'){
-        currentMode = 'live';
-      }
+    if(!button) return;
 
-      else if(filter === 'upcoming'){
-        currentMode = 'upcoming';
-      }
+    const filter = button.dataset.filter;
 
-      else if(filter === 'results'){
-        currentMode = 'results';
-      }
+    if(filter === 'upcoming'){
+      currentMode = 'upcoming';
+    }
+    else if(filter === 'results'){
+      currentMode = 'results';
+    }
+    else{
+      currentMode = 'live';
+    }
 
-      else if(filter === 'all'){
-        currentMode = 'live';
-      }
+    filters.querySelectorAll('button')
+      .forEach(b => b.classList.remove('active'));
 
-      tabs.forEach(tab => {
-        tab.classList.remove('active');
-      });
+    button.classList.add('active');
 
-      button.classList.add('active');
-
-      loadCurrentMode();
-
-    });
+    loadCurrentMode();
 
   });
 
