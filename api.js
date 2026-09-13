@@ -1,5 +1,8 @@
 const API_BASE = 'https://scorex-api.onrender.com';
 
+let refreshTimer = null;
+const REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
+
 async function loadSportsCatalog(){
   try{
     const r = await fetch(`${API_BASE}/api/sports`);
@@ -59,6 +62,13 @@ async function loadSportsCatalog(){
 
     loadRealScores();
 
+    // Actualisation automatique toutes les 15 minutes
+    if(refreshTimer) clearInterval(refreshTimer);
+
+    refreshTimer = setInterval(() => {
+      loadRealScores();
+    }, REFRESH_INTERVAL);
+
   }catch(e){
     document.getElementById('dataSource').textContent =
       'Serveur ScoreX indisponible';
@@ -75,7 +85,7 @@ async function loadRealScores(){
 
   try{
 
-    source.textContent = 'Chargement des scores…';
+    source.textContent = 'Actualisation des scores…';
 
     const r = await fetch(
       `${API_BASE}/api/live?sport=${encodeURIComponent(selected)}`
@@ -155,22 +165,27 @@ function normalizeMatches(items, sport){
 
     return {
       league: item.league?.name || item.league?.country || sport,
+
       time: formatStatus(item.status),
+
       home:
         teams.home?.name ||
         item.teams?.home?.name ||
         item.home?.name ||
         'Équipe 1',
+
       away:
         teams.away?.name ||
         item.teams?.away?.name ||
         item.away?.name ||
         'Équipe 2',
+
       homeScore:
         item.goals?.home ??
         item.scores?.home?.total ??
         item.scores?.home ??
         0,
+
       awayScore:
         item.goals?.away ??
         item.scores?.away?.total ??
