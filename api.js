@@ -270,7 +270,9 @@ async function loadUpcoming(){
         'Chargement des matchs à venir…';
     }
 
-    const date = getLocalDate();
+    const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const date = tomorrow.toISOString().split('T')[0];
 
     const r = await fetch(
       `${API_BASE}/api/upcoming?sport=${encodeURIComponent(selected)}&date=${date}`
