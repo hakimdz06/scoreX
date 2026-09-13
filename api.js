@@ -115,67 +115,41 @@ async function loadSportsCatalog(){
 
 function setupTabs(){
 
-  const buttons = document.querySelectorAll('button');
+  const tabs = document.querySelectorAll(
+    'button[data-filter]'
+  );
 
-  buttons.forEach(button => {
+  tabs.forEach(button => {
 
-    const text = button.textContent.trim().toLowerCase();
+    button.addEventListener('click', () => {
 
-    if(
-      text.includes('en direct') ||
-      text.includes('à venir') ||
-      text.includes('a venir') ||
-      text.includes('résultats') ||
-      text.includes('resultats')
-    ){
+      const filter = button.dataset.filter;
 
-      button.addEventListener('click', () => {
+      if(filter === 'live'){
+        currentMode = 'live';
+      }
 
-        if(
-          text.includes('en direct')
-        ){
-          currentMode = 'live';
-        }
+      else if(filter === 'upcoming'){
+        currentMode = 'upcoming';
+      }
 
-        if(
-          text.includes('à venir') ||
-          text.includes('a venir')
-        ){
-          currentMode = 'upcoming';
-        }
+      else if(filter === 'results'){
+        currentMode = 'results';
+      }
 
-        if(
-          text.includes('résultats') ||
-          text.includes('resultats')
-        ){
-          currentMode = 'results';
-        }
+      else if(filter === 'all'){
+        currentMode = 'live';
+      }
 
-        buttons.forEach(b => {
-
-          const t = b.textContent
-            .trim()
-            .toLowerCase();
-
-          if(
-            t.includes('en direct') ||
-            t.includes('à venir') ||
-            t.includes('a venir') ||
-            t.includes('résultats') ||
-            t.includes('resultats')
-          ){
-            b.classList.remove('active');
-          }
-
-        });
-
-        button.classList.add('active');
-
-        loadCurrentMode();
-
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
       });
 
-    }
+      button.classList.add('active');
+
+      loadCurrentMode();
+
+    });
 
   });
 
